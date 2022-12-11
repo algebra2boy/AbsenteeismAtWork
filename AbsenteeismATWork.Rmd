@@ -41,4 +41,6 @@ absent %>%
   theme(plot.title = element_text(hjust = 0.5)) + 
   theme(plot.subtitle = element_text(hjust = 0.5)) + 
   geom_vline(xintercept = 42, color = "red", linetype = "dotted", size = 0.6)
+
+ggsave("age_workload.pdf")
 ```
