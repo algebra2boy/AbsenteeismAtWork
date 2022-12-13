@@ -1,0 +1,322 @@
+%Package Identification
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{templatestyle}[2021/02/10 v1.0. A style file for demonstration]
+
+%Preliminary Declarations
+
+\usepackage{amsmath} %Allows access to a wide array of math symbols widely used in AMS-LaTeX
+\usepackage{amstext} %contains methods for including text inside of math environments, including in sub/superscripts
+\usepackage{amscd} %used for commutative diagrams; more sophisticated alternatives exist, like tikz-cd
+\usepackage{amsthm} %needed for theorem environments
+\usepackage{amssymb} %Includes useful additional symbols not found in the amsmath package
+\usepackage{mathrsfs} %Supports the commonly used math script font
+\usepackage{multicol} %For making tunable environments for multiple column lists
+\usepackage{verbatim} %Needed for easy quoting of LaTeX code not to be executed during compiling, but displayed "verbatim" instead
+\usepackage{yhmath} %More fonts?
+\usepackage{dsfont} %Googling a LaTeX package name allows one to learn what the package contains, find readmes, download the latest version, etc.
+\usepackage[pdftex]{graphics}
+\usepackage{graphicx} %For including images
+\usepackage{caption} % Need this package to handle captions in floats, such as figures.
+\usepackage{etoolbox} %Need this for TOC to render correctly, and handle other frequent issues
+\usepackage{epstopdf} %Converts EPS vector graphics into PDF images for inclusion in output .pdf
+%\usepackage{xcolor} %uncomment to use. xcolor can be used to specify text colorings.
+\usepackage[dvipsnames]{xcolor} %this is xcolor with the dvipsnames option. 
+\usepackage{geometry}
+%\usepackage{soul}
+\geometry{
+  top=0.75in,
+  inner=1in,
+  outer=1in,
+  bottom=0.75in,
+  headheight=3ex,
+  headsep=2ex,
+}
+%The geometry command above specifies settings for the page geometry, and controls margins.
+
+%\usepackage{fancyhdr}
+
+%\newcommand{\name}[1]{\def\havesnewstyle@name{#1}} %rightheader
+%\newcommand{\cntrhead}[1]{\def\havesnewstyle@cntrhead{#1}}
+%\newcommand{\lefthead}[1]{\def\havesnewstyle@lefthead{#1}}
+
+%FancyHdr 
+%\pagestyle{fancy} %Uncomment these  6 lines to add a "fancy header".  Without these the document will follow document class default for handling even/odd pages.
+%\lhead{\havesnewstyle@lefthead}
+%\chead{\havesnewstyle@cntrhead}
+%\rhead{\havesnewstyle@name}
+
+%\name{Havens} %Edit this to your own name
+%\cntrhead{Writing in Mathematics} %Center Header; usually a subject, or perhaps a short name for article/chapter/book
+%\lefthead{February 2020} %Left Header: you can edit this to be the desired date/format/etc
+
+% Theorem environment setup
+%Note that two versions of each theorem environment are defined: one which associates a section number label, and one which does not.
+\theoremstyle{definition} %The definition theorem style does not italicize the contents of the definition.
+\newtheorem*{dfn*}{Definition} 
+\newtheorem{dfn}{Definition}[section]
+
+\newtheorem*{rmk*}{Remark}
+\newtheorem{rmk}{Remark}[section]
+
+\newtheorem*{obv*}{Observation}
+\newtheorem{obv}{Observation}[section]
+
+\newtheorem*{clm*}{Claim}
+\newtheorem{clm}{Claim}[section]
+
+\newtheorem*{ex*}{Example}
+\newtheorem{ex}{Example}[subsection] %note that examples will number by subsection instead of section by this code
+
+\newtheorem*{exc*}{Exercise}
+\newtheorem{exc}{Exercise}[subsection] %similarly for exercises re: subsection numbering
+
+\theoremstyle{plain} %Plain theorem style will italicize text within the theorem, & \emph{...} will produce emphasis by returning nonitalic text.
+\newtheorem*{thm*}{Theorem}
+\newtheorem{thm}{Theorem}[section]
+
+\newtheorem*{cor*}{Corollary}
+\newtheorem{cor}{Corollary}[section]
+
+\newtheorem*{cnj*}{Conjecture}
+\newtheorem{cnj}{Conjecture}[section]
+
+\newtheorem*{lem*}{Lemma}
+\newtheorem{lem}{Lemma}[section]
+
+\newtheorem*{prp*}{Proposition}
+\newtheorem{prp}{Proposition}[section]
+
+%Shortcuts
+
+\newcommand{\RR}{\mathbb{R}}
+\newcommand{\Rtu}{\mathbb{R}^2}
+\newcommand{\RRR}{\mathbb{R}^3}
+\newcommand{\pione}{\pi_1(X, x_0)}
+\newcommand{\frm}{\colon}
+\newcommand{\gibt}{\exists \,}
+\newcommand{\qvela}{\forall \,}
+\newcommand{\into}{\hookrightarrow}
+\newcommand{\onto}{\twoheadrightarrow}
+\newcommand{\nsub}{\trianglelefteq}
+\newcommand{\busn}{\trianglerighteq}
+\newcommand{\vecgam}{\boldsymbol{\gamma}}
+\newcommand{\vgamdot}{\dot{\vecgam}}
+\newcommand{\vgamddot}{\ddot{\vecgam}}
+\newcommand{\vgamdddot}{\dddot{\vecgam}}
+\newcommand{\veps}{\varepsilon}
+\newcommand{\Inv}{\mathrm{Inv}}
+\newcommand{\Id}{\mathrm{Id}}
+\newcommand{\trm}[1]{\textrm{#1}}
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\uvec}[1]{\hat{\vec{#1}}}
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
+\newcommand{\ud}{\mathrm{d}}
+\newcommand{\dif}{\, \ud}
+
+%Common bold Vectors
+\newcommand{\ii}{\boldsymbol{\hat{\i}}} % The i-hat and j-hat here produce harmless errors in the console, but render visually correctly
+\newcommand{\jj}{\boldsymbol{\hat{\j}}} %
+\newcommand{\kk}{\boldsymbol{\hat{\vec{k}}}}
+\newcommand{\va}{\vec{a}} %\aa creates the a with a ring, so we'll use \va instead
+\newcommand{\bb}{\vec{b}}
+\newcommand{\cc}{\vec{c}}
+\newcommand{\rr}{\vec{r}}
+\newcommand{\ww}{\vec{w}}
+\newcommand{\nn}{\vec{n}}
+\newcommand{\qq}{\vec{q}}
+\newcommand{\pp}{\vec{p}}
+\newcommand{\vs}{\vec{s}} %\ss produces the eszettv (german double s)
+\newcommand{\vt}{\vec{t}} %don't want to step on \tt{typewritetext}'s toes 
+\newcommand{\uu}{\vec{u}}
+\newcommand{\vv}{\vec{v}}
+\newcommand{\xx}{\vec{x}}
+\newcommand{\yy}{\vec{y}}
+\newcommand{\zz}{\vec{z}}
+
+%Some unit vectors for polar/cylindrical/spherical frames
+\newcommand{\ur}{\uvec{u}_r}
+\newcommand{\uth}{\uvec{u}_\theta}
+\newcommand{\urh}{\uvec{u}_\varrho}
+\newcommand{\uph}{\uvec{u}_\varphi}
+\newcommand{\uz}{\uvec{u}_z}
+
+%Common Vector derivatives in Newton's Fluxion notation (over-dots)
+\newcommand{\rdot}{\dot{r}}
+\newcommand{\xdot}{\dot{x}}
+\newcommand{\ydot}{\dot{y}}
+\newcommand{\zdot}{\dot{z}}
+\newcommand{\pdot}{\dot{p}}
+\newcommand{\qdot}{\dot{q}}
+\newcommand{\vdot}{\dot{v}}
+\newcommand{\udot}{\dot{u}}
+\newcommand{\rddot}{\ddot{r}}
+\newcommand{\xddot}{\ddot{x}}
+\newcommand{\yddot}{\ddot{y}}
+\newcommand{\zddot}{\ddot{z}}
+\newcommand{\pddot}{\ddot{p}}
+\newcommand{\qddot}{\ddot{q}}
+\newcommand{\vddot}{\ddot{v}}
+\newcommand{\uddot}{\ddot{u}}
+\newcommand{\rdddot}{\dddot{r}}
+\newcommand{\xdddot}{\dddot{x}}
+\newcommand{\ydddot}{\dddot{y}}
+\newcommand{\zdddot}{\dddot{z}}
+\newcommand{\pdddot}{\dddot{p}}
+\newcommand{\qdddot}{\dddot{q}}
+\newcommand{\vdddot}{\dddot{v}}
+\newcommand{\udddot}{\dddot{u}}
+\newcommand{\rrdot}{\dot{\vec{r}}}
+\newcommand{\rrddot}{\ddot{\vec{r}}}
+\newcommand{\rrdddot}{\dddot{\vec{r}}}
+\newcommand{\uudot}{\dot{\vec{u}}}
+\newcommand{\vvdot}{\dot{\vec{v}}}
+\newcommand{\aadot}{\dot{\vec{a}}}
+
+%Differentials and derivative operators
+\newcommand{\ddvar}[1]{\frac{\ud}{\ud #1}} %Produces a derivative operator, e.g., \ddvar{x} is d/dx rendered in Leibniz fraction form. Note the `[1]' indicates that the new command takes one argument; the #1 specifies the placement. 
+\newcommand{\ddv}[1]{\frac{\ud}{\ud #1}}
+\newcommand{\ddt}[1]{\frac{\ud #1}{\ud t}}
+\newcommand{\dddtdt}[1]{\frac{\ud^2 #1}{\ud t^2}}
+\newcommand{\dfndvr}[2]{\frac{\ud #1}{\ud #2}} %Takes two arguments
+\newcommand{\pr}[2]{\operatorname{proj}_{\vec{#1}}\vec{#2}} %Projection operator
+\newcommand{\pru}[2]{\operatorname{proj}_{\uvec{#1}}\vec{#2}} %Projection onto a unit vector
+\newcommand{\pruu}[2]{\operatorname{proj}_{\uvec{#1}}\uvec{#2}} %A long winded way to write a dot product of two unit vectors
+\newcommand{\prru}[2]{\operatorname{proj}_{\vec{#1}}\uvec{#2}} %Projecting a unit vector onto a non-unit vector, equals the above, using normalization of first input (subscript) vector
+\newcommand{\cmp}[2]{\operatorname{comp}_{\vec{#1}}\vec{#2}} %Scalar projection or `component'
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} %Syntax to use \pd is \pd{f}{x}, to get partial f / partial x.
+\newcommand{\pdfx}{\frac{\partial f}{\partial x}} %Shorthand for common case of above
+\newcommand{\pdfy}{\frac{\partial f}{\partial y}} %Shorthand for another common case of above
+\newcommand{\pdfz}{\frac{\partial f}{\partial z}} %Shorthand for yet another common case of above
+\newcommand{\pdvr}[1]{\frac{\partial}{\partial #1}} %Produces a partial derivative operator, e.g. \ddvar{x} is the x partial operator. \newcommand{\pdv}[1]{\partial_{#1}}
+\newcommand{\ppd}[3]{\frac{\partial^2 #1}{\partial #2 \, \partial #3}}
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+%More operators and symbols
+\newcommand{\crosspr}[2]{\vec{#1} \times \vec{#2}} %Cross product; not much better than other shorthand uses
+\newcommand{\dotpr}[2]{\vec{#1} \cdot \vec{#2}} %Dot product
+\newcommand{\Kurv}{\boldsymbol{\mathcal{K}}} %Curvature vector
+\newcommand{\abbrv}{abbrv.\ } %You see, it's a joke.
+\newcommand{\du}[1]{D_{\vec{#1}}\,} %Directional derivative
+\newcommand{\del}{\nabla} 
+\newcommand{\curl}{\operatorname{curl}}
+\newcommand{\Curl}{\del \times}
+\newcommand{\grad}{\operatorname{grad}}
+\newcommand{\diver}{\operatorname{div}}
+\newcommand{\Div}{\del \cdot}
+\newcommand{\Bnd}{\partial}
+\newcommand{\dbar}{\bar{\Bnd}}
+\newcommand{\vecsig}{\boldsymbol{\sigma}}
+\newcommand{\vrho}{\boldsymbol{\rho}}
+\newcommand{\zvec}{\boldsymbol{0}}
+\newcommand{\bvrsig}{\boldsymbol{\varsigma}}
+\newcommand{\bomeg}{\boldsymbol{\omega}}
+\newcommand{\transi}{\mathrel{\text{\tpitchfork}}}
+\makeatletter
+\newcommand{\tpitchfork}{%
+  \vbox{
+    \baselineskip\z@skip
+    \lineskip-.52ex
+    \lineskiplimit\maxdimen
+    \m@th
+    \ialign{##\crcr\hidewidth\smash{$-$}\hidewidth\crcr$\pitchfork$\crcr}
+  }%
+}
+\makeatother
+
+\newcommand{\isoarrow}{\xrightarrow{\sim}}
+\newcommand{\simtimes}{\mathbin{\stackrel{\sim}{\smash{\times}\rule{0pt}{0.8ex}}}}
+
+%Harpoons
+\makeatletter
+\DeclareFontFamily{U}{MnSymbolA}{}
+\DeclareFontShape{U}{MnSymbolA}{m}{n}{
+    <-6>  MnSymbolA5
+   <6-7>  MnSymbolA6
+   <7-8>  MnSymbolA7
+   <8-9>  MnSymbolA8
+   <9-10> MnSymbolA9
+  <10-12> MnSymbolA10
+  <12->   MnSymbolA12}{}
+\DeclareFontShape{U}{MnSymbolA}{b}{n}{
+    <-6>  MnSymbolA-Bold5
+   <6-7>  MnSymbolA-Bold6
+   <7-8>  MnSymbolA-Bold7
+   <8-9>  MnSymbolA-Bold8
+   <9-10> MnSymbolA-Bold9
+  <10-12> MnSymbolA-Bold10
+  <12->   MnSymbolA-Bold12}{}
+\DeclareSymbolFont{MnSyA}{U}{MnSymbolA}{m}{n}
+\SetSymbolFont{MnSyA}{bold}{U}{MnSymbolA}{b}{n}
+
+\DeclareRobustCommand{\overleftharpoon}{\mathpalette{\overarrow@\leftharpoonfill@}}
+\DeclareRobustCommand{\overrightharpoon}{\mathpalette{\overarrow@\rightharpoonfill@}}
+\def\leftharpoonfill@{\arrowfill@\leftharpoondown\mn@relbar\mn@relbar}
+\def\rightharpoonfill@{\arrowfill@\mn@relbar\mn@relbar\rightharpoonup}
+
+\DeclareMathSymbol{\leftharpoondown}{\mathrel}{MnSyA}{'112}
+\DeclareMathSymbol{\rightharpoonup}{\mathrel}{MnSyA}{'100}
+\DeclareMathSymbol{\mn@relbar}{\mathrel}{MnSyA}{'320}
+\makeatother
+
+\newcommand{\disPO}{\overrightharpoon{PO}}
+\newcommand{\disOP}{\overrightharpoon{OP}}
+
+% Blackboard Bolds; probably only need A, C, D, E, F, N, Q, R, S, and Z, but why not have 'em all?
+
+\newcommand{\bbA}{\mathbb A} %\A makes Aring.
+\newcommand{\BB}{\mathbb B}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\DD}{\mathbb D}
+\newcommand{\EE}{\mathbb E}
+\newcommand{\FF}{\mathbb F}
+\newcommand{\GG}{\mathbb G}
+\newcommand{\HH}{\mathbb H}
+\newcommand{\II}{\mathbb I}
+\newcommand{\JJ}{\mathbb J}
+\newcommand{\KK}{\mathbb K}
+\newcommand{\LL}{\mathbb L}
+\newcommand{\MM}{\mathbb M}
+\newcommand{\NN}{\mathbb N}
+\newcommand{\OO}{\mathbb O}
+\newcommand{\PP}{\mathbb P}
+\newcommand{\QQ}{\mathbb Q}
+%\newcommand{\RR}{\mathbb R} Already defined above!
+\renewcommand{\SS}{\mathbb S}
+\newcommand{\TT}{\mathbb T}
+\newcommand{\UU}{\mathbb U}
+\newcommand{\VV}{\mathbb V}
+\newcommand{\WW}{\mathbb W}
+\newcommand{\XX}{\mathbb X}
+\newcommand{\YY}{\mathbb Y}
+\newcommand{\ZZ}{\mathbb Z}
+
+
+
+% Capital script letters
+  \newcommand{\A}{{\mathscr{A}}}
+  \newcommand{\B}{{\mathscr{B}}}
+  \newcommand{\C}{{\mathscr{C}}}
+  \newcommand{\D}{{\mathscr{D}}}
+  \newcommand{\E}{{\mathscr{E}}}
+  \newcommand{\F}{{\mathscr{F}}}
+  \newcommand{\G}{{\mathscr{G}}}
+\newcommand{\sH}{{\mathscr{H}}} %\H{} is used to add the hungarumalaut (double accute accent) 
+  \newcommand{\I}{{\mathscr{I}}}
+  \newcommand{\J}{{\mathscr{J}}}
+  \newcommand{\K}{{\mathscr{K}}}  
+\newcommand{\sL}{{\mathscr{L}}} %\L is taken for the L with stroke
+  \newcommand{\M}{{\mathscr{M}}}
+  \newcommand{\N}{{\mathscr{N}}}
+\newcommand{\sO}{{\mathscr{O}}} %\O produces the slashed O
+\newcommand{\sP}{{\mathscr{P}}} %\P produces paragraph symbol
+  \newcommand{\Q}{{\mathscr{Q}}}
+  \newcommand{\R}{{\mathscr{R}}}
+  \newcommand{\eS}{{\mathscr{S}}} %\S produces a section symbol
+  \newcommand{\T}{{\mathscr{T}}}
+  \newcommand{\U}{{\mathscr{U}}}
+  \newcommand{\V}{{\mathscr{V}}}
+  \newcommand{\W}{{\mathscr{W}}}
+  \newcommand{\X}{{\mathscr{X}}}
+  \newcommand{\Y}{{\mathscr{Y}}}
+  \newcommand{\Z}{{\mathscr{Z}}}
+
+\frenchspacing
